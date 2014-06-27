@@ -1,0 +1,4 @@
+#S3method(print, qdm)
+#S3method(predict, qdm)
+
+export(qdm, psi)
