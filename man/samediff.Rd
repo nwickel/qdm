@@ -8,7 +8,7 @@
   data frame.
 }
 \usage{
-psi(subj, dat, oa1="s1", oa2="s2")
+psi(subj, dat, oa1="s1", oa2="s2", id="id", resp="resp")
 }
 \arguments{
   \item{subj}{id of certain subject}
@@ -21,8 +21,8 @@ psi(subj, dat, oa1="s1", oa2="s2")
   respectively}
 }
 \examples{
-data(lightness)
-psi1 <- psi("vp01", lightness)
+data(FMrate)
+psi1 <- psi("vp01", FMrate)
 }
 %\keyword{file}
 

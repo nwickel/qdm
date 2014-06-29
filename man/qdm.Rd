@@ -38,8 +38,8 @@ qdm(psi, start, respfun = c("logistic", "guessing", "dlogistic",
 }
 \examples{
 ## load data
-data(lightness)
-psi1 <- psi("vp01", lightness)
+data(FMrate)
+psi1 <- psi("vp01", FMrate)
 
 ## estimate model
 p.s <- c(.2, .5, .1, .5, .3, .1, .1, .1)
