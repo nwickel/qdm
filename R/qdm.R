@@ -76,20 +76,20 @@ qdm <- function(psi, start, respfun = c("logistic", "guessing", "dlogistic",
 }
 
 
-print.qdm <- function(obj, digits = max(3L, getOption("digits") - 3L),
+print.qdm <- function(x, digits = max(3L, getOption("digits") - 3L),
                       ...){
   cat("\nQuadrilateral dissimilarity models\n\n")
   cat("Coefficients:\n")
-  print.default(format(coef(obj), digits = digits), print.gap = 2L, 
+  print.default(format(coef(x), digits = digits), print.gap = 2L, 
                 quote = FALSE)
   cat("\n")
-  invisible(obj)
+  invisible(x)
 }
 
 
 ## FIX ME: args to qdmfun
-predict.qdm <- function(obj, x = obj$psi$x, y = obj$psi$y, ...){
-  yhat <- outer(x, y, function(x, y) qdmfun(x, y, coef(obj)))
+predict.qdm <- function(object, x = object$psi$x, y = object$psi$y, ...){
+  yhat <- outer(x, y, function(x, y) qdmfun(x, y, coef(object)))
   dimnames(yhat) <- list(x, y)
   yhat
 }
