@@ -74,6 +74,7 @@ qdm <- function(psi, start, respfun = c("logistic", "guessing", "dlogistic",
   class(retval) <- "qdm"
   retval
 }
+# TODO Give warning if optimizer does not give new parameters?
 
 
 print.qdm <- function(x, digits = max(3L, getOption("digits") - 3L),
