@@ -42,7 +42,8 @@ data(lightness)
 psi1 <- psi("vp01", lightness)
 
 ## estimate model
-q1 <- qdm(psi1$psi)
+p.s <- c(.2, .5, .1, .5, .3, .1, .1, .1)
+q1 <- qdm(psi1$psi, start=p.s)
 print(q1)}
 %\keyword{file}
 

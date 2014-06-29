@@ -8,11 +8,11 @@
   data frame.
 }
 \usage{
-psi(subj, dat)
+psi(subj, dat, oa1=dat$s1, oa2=dat$s2)
 }
 \arguments{
   \item{subj}{id of certain subject}
-  \item{dat}{data frame}
+  \item{dat}{data frame with repeated same-different judgments}
   \item{oa1}{vector of stimuli names in the first observation area}
   \item{oa2}{vector of stimuli names in the second observation area}
 }
