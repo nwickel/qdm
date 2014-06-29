@@ -8,7 +8,7 @@
   data frame.
 }
 \usage{
-psi(subj, dat, oa1=dat$s1, oa2=dat$s2)
+psi(subj, dat, oa1="s1", oa2="s2")
 }
 \arguments{
   \item{subj}{id of certain subject}
