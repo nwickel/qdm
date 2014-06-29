@@ -15,11 +15,8 @@ psi(subj, dat)
   \item{dat}{data frame}
 }
 \examples{
-\dontrun{
-## load data
 data(lightness)
-psi1 <- psi(lightness)
-}
+psi1 <- psi("vp01", lightness)
 }
 %\keyword{file}
 

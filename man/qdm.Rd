@@ -37,14 +37,12 @@ qdm(psi, start, respfun = c("logistic", "guessing", "dlogistic",
   \eqn{X^2}.}
 }
 \examples{
-\dontrun{
 ## load data
 data(lightness)
-psi1 <- psi(lightness)
+psi1 <- psi("vp01", lightness)
 
 ## estimate model
 q1 <- qdm(psi1$psi)
 print(q1)}
-}
 %\keyword{file}
 
