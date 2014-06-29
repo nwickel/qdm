@@ -4,13 +4,13 @@
 
 # Calculate discrimination probabilities, P("different"), from same-different
 # judgments
-psi <- function(subj, dat){
-    freq <- as.matrix(unclass(xtabs(~ s1 + s2, dat[dat$resp == "d" &
+psi <- function(subj, dat, oa1=dat$s1, oa2=dat$s2){
+    freq <- as.matrix(unclass(xtabs(~ oa1 + oa2, dat[dat$resp == "d" &
                                                    dat$id == subj,])))
     attr(freq, "call") <- NULL
     # nstim <- length(unique(dat$s1))  FIX ME: delete?
     # probability different
-    n <- as.matrix(unclass(xtabs(~ s1 + s2, dat[dat$id == subj,])))
+    n <- as.matrix(unclass(xtabs(~ oa1 + oa2, dat[dat$id == subj,])))
     attr(n, "call") <- NULL
     prob <- freq/n
     prob[which(is.na(prob))] <- 1

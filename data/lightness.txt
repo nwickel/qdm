@@ -1,4 +1,4 @@
-vp ses resp RT key stim inf1 inf2
+vp ses resp RT key stim s1 s2
 vp01 ses01 d 1.0201 r stim01 0 1
 vp01 ses01 d 0.8597 r stim67 6 7
 vp01 ses01 d 0.8166 r stim15 1 5
