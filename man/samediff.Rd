@@ -15,6 +15,10 @@ psi(subj, dat, oa1="s1", oa2="s2")
   \item{dat}{data frame with repeated same-different judgments}
   \item{oa1}{vector of stimuli names in the first observation area}
   \item{oa2}{vector of stimuli names in the second observation area}
+  \item{id}{name of id variable}
+  \item{resp}{name of response variable for same-different judgments;
+  answers have to be "d" and "s" for 'different' and 'same' response,
+  respectively}
 }
 \examples{
 data(lightness)
