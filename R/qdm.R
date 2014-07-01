@@ -95,7 +95,7 @@ print.qdm <- function(x, digits = max(3L, getOption("digits") - 3L),
 ## FIX ME: args to qdmfun
 predict.qdm <- function(object, x = object$psi$x, y = object$psi$y,
                         respfun = object$respfun, ...){
-  yhat <- outer(x, y, function(x, y) qdmfun(x, y, coef(object), respfun)
+  yhat <- outer(x, y, function(x, y) qdmfun(x, y, coef(object), respfun))
   dimnames(yhat) <- list(x, y)
   yhat
 }

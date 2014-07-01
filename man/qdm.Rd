@@ -9,7 +9,7 @@
 qdm(psi, start, respfun = c("logistic", "dc", "guessing", "dlogistic",
     "shepardA", "shepardB", "shepardE", "shepardF"), estimfun =
     c("minchi2", "ols", "wls"), optimizer = c("optim", "nlm"), optimargs =
-    list(), ...)
+    list())
 }
 \arguments{
   \item{psi}{a data object created with \code{\link{psi}}.}
@@ -21,7 +21,6 @@ qdm(psi, start, respfun = c("logistic", "dc", "guessing", "dlogistic",
   \code{\link{optim}}.}
   \item{optimargs}{takes addtional arguments to control \code{\link{nlm}}
   or \code{\link{optim}}.}
-  \item{...}{further arguments passed to or from other methods.}
 }
 \details{
   \preformatted{respfun}{Different functions can be used to describe the
