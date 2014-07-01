@@ -6,7 +6,7 @@
   Fits a Quadrilateral Dissimilarity Model to same-different data.
 }
 \usage{
-qdm(psi, start, respfun = c("logistic", "guessing", "dlogistic",
+qdm(psi, start, respfun = c("logistic", "dc", "guessing", "dlogistic",
     "shepardA", "shepardB", "shepardE", "shepardF"), estimfun =
     c("minchi2", "ols", "wls"), optimizer = c("optim", "nlm"), optimargs =
     list(), ...)

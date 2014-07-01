@@ -4,9 +4,9 @@
 
 
 ## QDM function
-qdmfun <- function(x, y, p, response = c("logistic", "guessing", "dlogistic",
-                   "shepardA", "shepardB", "shepardE", "shepardF"),
-                   log = "") {
+qdmfun <- function(x, y, p, response = c("logistic", "dc", "guessing",
+                   "dlogistic", "shepardA", "shepardB", "shepardE",
+                   "shepardF"), log = "") {
   if (grepl("x", log)) x <- log(x)
   if (grepl("y", log)) y <- log(y)
 
@@ -15,6 +15,7 @@ qdmfun <- function(x, y, p, response = c("logistic", "guessing", "dlogistic",
   response <- match.arg(response)
   switch(EXPR = response,
      logistic = 1/(1 + exp(-p[7]*s - p[8])),
+           dc = 1 - exp(-p[7]*s - p[8]),
      guessing = p[9] + (1 - p[9])*1/(1 + exp(-p[7]*s - p[8])),
     dlogistic = 1 - exp(-p[7]*s - p[8])/((1 + exp(-p[7]*s - p[8]))^2),
      shepardA = 1 - (1 - s/p[7] + (s/p[7])*log(s/p[7])),
@@ -41,14 +42,14 @@ objfun <- function(p, psi, estimfun = c("minchi2", "ols", "wls"), ...){
       sum(na.omit(as.vector(weights*((psi$freq - psi$ntrials*yhat)^2))))
     }
   )
-  if (any(yhat < 0)) Inf else out
+  if (any(yhat < 0) | any(yhat > 1)) Inf else out
 }
 
 
 ## QDM user interface
-qdm <- function(psi, start, respfun = c("logistic", "guessing", "dlogistic",
-                "shepardA", "shepardB", "shepardE", "shepardF"),
-                estimfun = c("minchi2", "ols", "wls"),
+qdm <- function(psi, start, respfun = c("logistic", "dc", "guessing",
+                "dlogistic", "shepardA", "shepardB", "shepardE",
+                "shepardF"), estimfun = c("minchi2", "ols", "wls"),
                 optimizer = c("optim", "nlm"), optimargs = list(), ...){
 
   if (class(psi) == "psi"){
