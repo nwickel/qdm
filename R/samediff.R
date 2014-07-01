@@ -32,9 +32,11 @@ psi <- function(subj, dat, oa1="s1", oa2="s2", id="id", resp="resp"){
     prob[which(is.na(prob))] <- 1
     x <- as.numeric(rownames(freq))
     y <- as.numeric(rownames(freq))
-    list(prob=prob, ntrials=n, freq=freq, x=x, y=y)
+    retval <- list(prob=prob, ntrials=n, freq=freq, x=x, y=y)
+    class(retval) <- "psi"
+    retval
     } else {
-    stop("response variable has to consist of 'd' and 's' answers")
+    stop("response variable does not consist of 'd' and 's' answers")
     }
 }
 

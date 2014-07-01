@@ -51,6 +51,8 @@ qdm <- function(psi, start, respfun = c("logistic", "guessing", "dlogistic",
                 estimfun = c("minchi2", "ols", "wls"),
                 optimizer = c("optim", "nlm"), optimargs = list(), ...){
 
+  if (class(psi) == "psi"){
+
   respfun <- match.arg(respfun)
   esitmfun <- match.arg(estimfun)
 
@@ -73,6 +75,9 @@ qdm <- function(psi, start, respfun = c("logistic", "guessing", "dlogistic",
   retval = list(optimout=optimout, coefficients=coefficients, psi=psi)
   class(retval) <- "qdm"
   retval
+  } else {
+  stop("Object given to argument psi has to be of class psi.")
+}
 }
 # TODO Give warning if optimizer does not give new parameters?
 
