@@ -6,9 +6,7 @@
 ## QDM function
 qdmfun <- function(x, y, p, response = c("logistic", "dc", "guessing",
                    "dlogistic", "shepardA", "shepardB", "shepardE",
-                   "shepardF"), log = "") {
-  if (grepl("x", log)) x <- log(x)
-  if (grepl("y", log)) y <- log(y)
+                   "shepardF")) {
 
   s <- p[1] + p[2]*x + p[3]*x^2 + 2*p[4]*abs(x - y) + p[5]*y + p[6]*y^2
 
@@ -49,30 +47,31 @@ objfun <- function(p, psi, estimfun = c("minchi2", "ols", "wls"), ...){
 qdm <- function(psi, start, respfun = c("logistic", "dc", "guessing",
                 "dlogistic", "shepardA", "shepardB", "shepardE",
                 "shepardF"), estimfun = c("minchi2", "ols", "wls"),
-                optimizer = c("optim", "nlm"), optimargs = list(), ...){
+                optimizer = c("optim", "nlm"), optimargs = list()){
 
   if (class(psi) == "psi"){
 
   respfun <- match.arg(respfun)
-  esitmfun <- match.arg(estimfun)
+  estimfun <- match.arg(estimfun)
 
   ## Optimize
   optimizer <- match.arg(optimizer)
   if (optimizer == "nlm") {
     optArgs <- list(f=objfun, p=start, psi=psi, estimfun=estimfun,
                     response=respfun)
-    optArgs <- c(optArgs, as.list(optimargs), list(...))
+    optArgs <- c(optArgs, as.list(optimargs))
     optimout <- do.call(nlm, optArgs)
     coefficients <- optimout$estimate
   } else {  # optim()
     optArgs <- list(par=start, fn=objfun, psi=psi, estimfun=estimfun,
                     response=respfun)
-    optArgs <- c(optArgs, as.list(optimargs), list(...))
+    optArgs <- c(optArgs, as.list(optimargs))
     optimout <- do.call(optim, optArgs)
     coefficients <- optimout$par
   }
 
-  retval = list(optimout=optimout, coefficients=coefficients, psi=psi)
+  retval = list(optimout=optimout, coefficients=coefficients, psi=psi,
+                respfun=respfun)
   class(retval) <- "qdm"
   retval
   } else {
@@ -94,8 +93,9 @@ print.qdm <- function(x, digits = max(3L, getOption("digits") - 3L),
 
 
 ## FIX ME: args to qdmfun
-predict.qdm <- function(object, x = object$psi$x, y = object$psi$y, ...){
-  yhat <- outer(x, y, function(x, y) qdmfun(x, y, coef(object)))
+predict.qdm <- function(object, x = object$psi$x, y = object$psi$y,
+                        respfun = object$respfun, ...){
+  yhat <- outer(x, y, function(x, y) qdmfun(x, y, coef(object), respfun)
   dimnames(yhat) <- list(x, y)
   yhat
 }
