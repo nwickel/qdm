@@ -7,7 +7,7 @@ Authors@R: c(person("Florian", "Wickelmaier", role = c("aut", "cre"),
               person("Nora", "Umbach", role = "aut"))
 Author: Florian Wickelmaier and Nora Umbach
 Maintainer: Florian Wickelmaier <wickelmaier@web.de>
-Depends: R (>= 3.0.0)
+Depends: R (>= 3.0.0), graphics
 Description: A short (one paragraph) description of what
   the package does and why it may be useful.
 License: GPL (>= 2)
