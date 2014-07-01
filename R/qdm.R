@@ -25,7 +25,6 @@ qdmfun <- function(x, y, p, response = c("logistic", "dc", "guessing",
   )
 }
 
-
 ## QDM objective function
 objfun <- function(p, psi, estimfun = c("minchi2", "ols", "wls"), ...){
   yhat <- outer(psi$x, psi$y, function(x, y) qdmfun(x, y, p, ...))
@@ -100,4 +99,10 @@ predict.qdm <- function(object, x = object$psi$x, y = object$psi$y, ...){
   dimnames(yhat) <- list(x, y)
   yhat
 }
+
+persp.qdm <- function(x, col="gray", zlim=0:1, phi=10, theta=-25,
+                      xlab="OA1", ylab="OA2", zlab="Predictions", ...){
+  persp(x$psi$x, x$psi$y, predict(x), col=col, zlim=zlim, phi=phi,
+        theta=theta, xlab=xlab, ylab=ylab, zlab=zlab, ...)
+  }
 
