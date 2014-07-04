@@ -1,27 +1,37 @@
 # qdm.R
 #
-# last mod: Jun/17/2014, FW
+# last mod: Jul/03/2014, NU
 
 
 ## QDM function
 qdmfun <- function(x, y, p, response = c("logistic", "dc", "guessing",
-                   "dlogistic", "shepardA", "shepardB", "shepardE",
-                   "shepardF")) {
+                   "dlogistic", "dlogisticp", "shepardA", "shepardAneg",
+                   "shepardB", "shepardBneg", "shepardE", "shepardEneg",
+                   "shepardF", "shepardFneg")) {
 
   s <- p[1] + p[2]*x + p[3]*x^2 + 2*p[4]*abs(x - y) + p[5]*y + p[6]*y^2
+
+  #if (any(s > 100)) s[s > 100] <- 100 
+  #if (any(s < -100)) s[s < -100] <- -100 
+  #print(s)
 
   response <- match.arg(response)
   switch(EXPR = response,
      logistic = 1/(1 + exp(-p[7]*s - p[8])),
-           dc = 1 - exp(-p[7]*s - p[8]),
      guessing = p[9] + (1 - p[9])*1/(1 + exp(-p[7]*s - p[8])),
     dlogistic = 1 - exp(-p[7]*s - p[8])/((1 + exp(-p[7]*s - p[8]))^2),
+    dlogisticp = 1 - p[9]*exp(-p[7]*s - p[8])/((1 + exp(-p[7]*s - p[8]))^2),
      shepardA = 1 - (1 - s/p[7] + (s/p[7])*log(s/p[7])),
+     shepardAneg = 1 - s/p[7] + (s/p[7])*log(s/p[7]),
      shepardB = 1 - (1 - (s/p[7])^2 + p[8]*(s/p[7])*log(s/p[7])),
+     shepardBneg = 1 - (s/p[7])^2 + p[8]*(s/p[7])*log(s/p[7]),
      shepardE = 1 - (1 - p[8]*s/p[7] + p[8]*(s/p[7])^2 - (s/p[7])^3),
-     shepardF = 1 - exp(-p[7]*s - p[8])
+     shepardEneg = 1 - p[8]*s/p[7] + p[8]*(s/p[7])^2 - (s/p[7])^3,
+     shepardF = 1 - exp(-p[7]*s - p[8]),
+     shepardFneg = exp(-p[7]*s - p[8])
   )
 }
+# exp(700) !!!
 
 ## QDM objective function
 objfun <- function(p, psi, estimfun = c("minchi2", "ols", "wls"), ...){
@@ -45,9 +55,11 @@ objfun <- function(p, psi, estimfun = c("minchi2", "ols", "wls"), ...){
 
 ## QDM user interface
 qdm <- function(psi, start, respfun = c("logistic", "dc", "guessing",
-                "dlogistic", "shepardA", "shepardB", "shepardE",
-                "shepardF"), estimfun = c("minchi2", "ols", "wls"),
-                optimizer = c("optim", "nlm"), optimargs = list()){
+                   "dlogistic", "dlogisticp", "shepardA", "shepardAneg",
+                   "shepardB", "shepardBneg", "shepardE", "shepardEneg",
+                   "shepardF", "shepardFneg"), estimfun = c("minchi2",
+                   "ols", "wls"), optimizer = c("optim", "nlm"), optimargs
+                   = list()){
 
   if (class(psi) == "psi"){
 
