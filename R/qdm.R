@@ -4,7 +4,7 @@
 
 
 ## QDM function
-qdmfun <- function(x, y, p, response = c("logistic", "dc", "guessing",
+qdmfun <- function(x, y, p, response = c("logistic", "guessing",
                    "dlogistic", "dlogisticp", "shepardA", "shepardAneg",
                    "shepardB", "shepardBneg", "shepardE", "shepardEneg",
                    "shepardF", "shepardFneg")) {
@@ -54,7 +54,7 @@ objfun <- function(p, psi, estimfun = c("minchi2", "ols", "wls"), ...){
 
 
 ## QDM user interface
-qdm <- function(psi, start, respfun = c("logistic", "dc", "guessing",
+qdm <- function(psi, start, respfun = c("logistic", "guessing",
                    "dlogistic", "dlogisticp", "shepardA", "shepardAneg",
                    "shepardB", "shepardBneg", "shepardE", "shepardEneg",
                    "shepardF", "shepardFneg"), estimfun = c("minchi2",
