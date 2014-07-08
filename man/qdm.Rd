@@ -8,9 +8,9 @@
 \usage{
 qdm(psi, start, respfun = c("logistic", "guessing", "dlogistic",
     "dlogisticp", "shepardA", "shepardAneg", "shepardB", "shepardBneg",
-    "shepardE", "shepardEneg", "shepardF", "shepardFneg"), estimfun =
-    c("minchi2", "ols", "wls"), optimizer = c("optim", "nlm"), optimargs =
-    list())
+    "shepardD", "shepardDneg", "shepardE", "shepardEneg", "shepardF",
+    "shepardFneg"), estimfun = c("minchi2", "ols", "wls"), optimizer =
+    c("optim", "nlm"), optimargs = list())
 }
 \arguments{
   \item{psi}{a data object created with \code{\link{psi}}.}
