@@ -21,12 +21,12 @@ qdmfun <- function(x, y, p, response = c("logistic", "guessing",
      guessing = p[9] + (1 - p[9])*1/(1 + exp(-p[7]*s - p[8])),
     dlogistic = 1 - exp(-p[7]*s - p[8])/((1 + exp(-p[7]*s - p[8]))^2),
     dlogisticp = 1 - p[9]*exp(-p[7]*s - p[8])/((1 + exp(-p[7]*s - p[8]))^2),
-     shepardA = 1 - (1 - s/p[7] + (s/p[7])*log(s/p[7])),
-     shepardAneg = 1 - s/p[7] + (s/p[7])*log(s/p[7]),
-     shepardB = 1 - (1 - (s/p[7])^2 + p[8]*(s/p[7])*log(s/p[7])),
-     shepardBneg = 1 - (s/p[7])^2 + p[8]*(s/p[7])*log(s/p[7]),
-     shepardE = 1 - (1 - p[8]*s/p[7] + p[8]*(s/p[7])^2 - (s/p[7])^3),
-     shepardEneg = 1 - p[8]*s/p[7] + p[8]*(s/p[7])^2 - (s/p[7])^3,
+     shepardA = 1 - (1 - s*p[7] + (s*p[7])*log(s*p[7])),
+     shepardAneg = 1 - s*p[7] + (s*p[7])*log(s*p[7]),
+     shepardB = 1 - (1 - (s*p[7])^2 + p[8]*(s*p[7])*log(s*p[7])),
+     shepardBneg = 1 - (s*p[7])^2 + p[8]*(s*p[7])*log(s*p[7]),
+     shepardE = 1 - (1 - p[8]*s*p[7] + p[8]*(s*p[7])^2 - (s*p[7])^3),
+     shepardEneg = 1 - p[8]*s*p[7] + p[8]*(s*p[7])^2 - (s*p[7])^3,
      shepardF = 1 - exp(-p[7]*s - p[8]),
      shepardFneg = exp(-p[7]*s - p[8])
   )
@@ -49,6 +49,7 @@ objfun <- function(p, psi, estimfun = c("minchi2", "ols", "wls"), ...){
       sum(na.omit(as.vector(weights*((psi$freq - psi$ntrials*yhat)^2))))
     }
   )
+  #yhat[is.na(yhat)] <- 0.5
   if (any(yhat < 0) | any(yhat > 1)) Inf else out
 }
 
