@@ -4,10 +4,11 @@
 
 
 ## QDM function
-qdmfun <- function(x, y, p, response = c("logistic", "guessing",
-                   "dlogistic", "dlogisticp", "shepardA", "shepardAneg",
-                   "shepardB", "shepardBneg", "shepardD", "shepardDneg",
-                   "shepardE", "shepardEneg", "shepardF", "shepardFneg")) {
+qdmfun <- function(x, y, p, response = c("logistic", "guessing", "gumbel",
+                   "weibull", "cauchy", "dlogistic", "dlogisticp",
+                   "shepardA", "shepardAneg", "shepardB", "shepardBneg",
+                   "shepardD", "shepardDneg", "shepardE", "shepardEneg",
+                   "shepardF", "shepardFneg")) {
 
   s <- p[1] + p[2]*x + p[3]*x^2 + 2*p[4]*abs(x - y) + p[5]*y + p[6]*y^2
 
@@ -19,18 +20,21 @@ qdmfun <- function(x, y, p, response = c("logistic", "guessing",
   switch(EXPR = response,
      logistic = 1/(1 + exp(-p[7]*s - p[8])),
      guessing = p[9] + (1 - p[9])*1/(1 + exp(-p[7]*s - p[8])),
+       gumbel = exp(-exp((-p[7]*s - p[8])/p[9])),
+      weibull = pweibull(s, shape=p[7], scale=p[8]),
+       cauchy = pcauchy(s, location=p[7], scale=p[8]),
     dlogistic = 1 - exp(-p[7]*s - p[8])/((1 + exp(-p[7]*s - p[8]))^2),
-    dlogisticp = 1 - p[9]*exp(-p[7]*s - p[8])/((1 + exp(-p[7]*s - p[8]))^2),
+   dlogisticp = 1 - p[9]*exp(-p[7]*s - p[8])/((1 + exp(-p[7]*s - p[8]))^2),
      shepardA = 1 - (1 - s*p[7] + (s*p[7])*log(abs(s*p[7]))),
-     shepardAneg = 1 - s*p[7] + (s*p[7])*log(abs(s*p[7])),
+  shepardAneg = 1 - s*p[7] + (s*p[7])*log(abs(s*p[7])),
      shepardB = 1 - (1 - (s*p[7])^2 + p[8]*(s*p[7])*log(abs(s*p[7]))),
-     shepardBneg = 1 - (s*p[7])^2 + p[8]*(s*p[7])*log(abs(s*p[7])),
+  shepardBneg = 1 - (s*p[7])^2 + p[8]*(s*p[7])*log(abs(s*p[7])),
      shepardD = 1 - (1 - p[8]*(s*p[7]) + (s*p[7])^2),
-     shepardDneg = 1 - p[8]*(s*p[7]) + (s*p[7])^2,
+  shepardDneg = 1 - p[8]*(s*p[7]) + (s*p[7])^2,
      shepardE = 1 - (1 - p[8]*s*p[7] + p[8]*(s*p[7])^2 - (s*p[7])^3),
-     shepardEneg = 1 - p[8]*s*p[7] + p[8]*(s*p[7])^2 - (s*p[7])^3,
+  shepardEneg = 1 - p[8]*s*p[7] + p[8]*(s*p[7])^2 - (s*p[7])^3,
      shepardF = 1 - exp(-p[7]*s - p[8]),
-     shepardFneg = exp(-p[7]*s - p[8])
+  shepardFneg = exp(-p[7]*s - p[8])
   )
 }
 # exp(700) !!!
@@ -57,12 +61,13 @@ objfun <- function(p, psi, estimfun = c("minchi2", "ols", "wls"), ...){
 
 
 ## QDM user interface
-qdm <- function(psi, start, respfun = c("logistic", "guessing",
-                   "dlogistic", "dlogisticp", "shepardA", "shepardAneg",
-                   "shepardB", "shepardBneg", "shepardD", "shepardDneg",
-                   "shepardE", "shepardEneg", "shepardF", "shepardFneg"),
-                   estimfun = c("minchi2", "ols", "wls"), optimizer =
-                   c("optim", "nlm"), optimargs = list()){
+qdm <- function(psi, start, respfun = c("logistic", "guessing", "gumbel",
+                   "weibull", "cauchy", "dlogistic", "dlogisticp",
+                   "shepardA", "shepardAneg", "shepardB", "shepardBneg",
+                   "shepardD", "shepardDneg", "shepardE", "shepardEneg",
+                   "shepardF", "shepardFneg"), estimfun = c("minchi2",
+                   "ols", "wls"), optimizer = c("optim", "nlm"), optimargs
+                   = list()){
 
   if (class(psi) == "psi"){
 
