@@ -5,10 +5,10 @@
 
 ## QDM function
 qdmfun <- function(x, y, p, response = c("logistic", "guessing", "gumbel",
-                   "weibull", "cauchy", "dlogistic", "dlogisticp",
-                   "shepardA", "shepardAneg", "shepardB", "shepardBneg",
-                   "shepardD", "shepardDneg", "shepardE", "shepardEneg",
-                   "shepardF", "shepardFneg")) {
+                   "gompertz", "weibull", "cauchy", "quadratic", "cubic",
+                   "dlogistic", "dlogisticp", "shepardA", "shepardAneg",
+                   "shepardB", "shepardBneg", "shepardD", "shepardDneg",
+                   "shepardE", "shepardEneg", "shepardF", "shepardFneg")) {
 
   s <- p[1] + p[2]*x + p[3]*x^2 + 2*p[4]*abs(x - y) + p[5]*y + p[6]*y^2
 
@@ -21,8 +21,11 @@ qdmfun <- function(x, y, p, response = c("logistic", "guessing", "gumbel",
      logistic = 1/(1 + exp(-p[7]*s - p[8])),
      guessing = p[9] + (1 - p[9])*1/(1 + exp(-p[7]*s - p[8])),
        gumbel = exp(-exp((-p[7]*s - p[8])/p[9])),
+     gompertz = p[7]*exp(-p[8]*exp(-p[9]*s)),
       weibull = pweibull(s, shape=p[7], scale=p[8]),
        cauchy = pcauchy(s, location=p[7], scale=p[8]),
+    quadratic = p[7] + p[8]*s + p[9] * s^2,
+        cubic = p[7] + p[8]*s + p[9] * s^2 + p[10]*s^3,
     dlogistic = 1 - exp(-p[7]*s - p[8])/((1 + exp(-p[7]*s - p[8]))^2),
    dlogisticp = 1 - p[9]*exp(-p[7]*s - p[8])/((1 + exp(-p[7]*s - p[8]))^2),
      shepardA = 1 - (1 - s*p[7] + (s*p[7])*log(abs(s*p[7]))),
@@ -62,12 +65,12 @@ objfun <- function(p, psi, estimfun = c("minchi2", "ols", "wls"), ...){
 
 ## QDM user interface
 qdm <- function(psi, start, respfun = c("logistic", "guessing", "gumbel",
-                   "weibull", "cauchy", "dlogistic", "dlogisticp",
-                   "shepardA", "shepardAneg", "shepardB", "shepardBneg",
-                   "shepardD", "shepardDneg", "shepardE", "shepardEneg",
-                   "shepardF", "shepardFneg"), estimfun = c("minchi2",
-                   "ols", "wls"), optimizer = c("optim", "nlm"), optimargs
-                   = list()){
+                   "gompertz", "weibull", "cauchy", "quadratic", "cubic",
+                   "dlogistic", "dlogisticp", "shepardA", "shepardAneg",
+                   "shepardB", "shepardBneg", "shepardD", "shepardDneg",
+                   "shepardE", "shepardEneg", "shepardF", "shepardFneg"),
+                   estimfun = c("minchi2", "ols", "wls"), optimizer =
+                   c("optim", "nlm"), optimargs = list()){
 
   if (class(psi) == "psi"){
 

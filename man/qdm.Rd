@@ -6,12 +6,12 @@
   Fits a Quadrilateral Dissimilarity Model to same-different data.
 }
 \usage{
-qdm(psi, start, respfun = c("logistic", "guessing", "gumbel",
-    "weibull", "cauchy", "dlogistic", "dlogisticp", "shepardA",
-    "shepardAneg", "shepardB", "shepardBneg", "shepardD", "shepardDneg",
-    "shepardE", "shepardEneg", "shepardF", "shepardFneg"), estimfun =
-    c("minchi2", "ols", "wls"), optimizer = c("optim", "nlm"), optimargs =
-    list())
+qdm(psi, start, respfun = c("logistic", "guessing", "gumbel", "gompertz",
+    "weibull", "cauchy", "quadratic", "cubic", "dlogistic", "dlogisticp",
+    "shepardA", "shepardAneg", "shepardB", "shepardBneg", "shepardD",
+    "shepardDneg", "shepardE", "shepardEneg", "shepardF", "shepardFneg"),
+    estimfun = c("minchi2", "ols", "wls"), optimizer = c("optim", "nlm"),
+    optimargs = list())
 }
 \arguments{
   \item{psi}{a data object created with \code{\link{psi}}.}
