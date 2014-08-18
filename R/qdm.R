@@ -9,9 +9,9 @@ qdmfun <- function(x, y, p, response = c("logistic", "guessing", "gumbel",
                    "dlogistic", "dlogisticp", "shepardA", "shepardAneg",
                    "shepardB", "shepardBneg", "shepardD", "shepardDneg",
                    "shepardE", "shepardEneg", "shepardF", "shepardFneg",
-                   "TK92")) {
+                   "TK92"), bias = 0) {
 
-  s <- p[1] + p[2]*x + p[3]*x^2 + 2*p[4]*abs(x - y) + p[5]*y + p[6]*y^2
+  s <- p[1] + p[2]*x + p[3]*x^2 + 2*p[4]*abs((x-bias) - y) + p[5]*y + p[6]*y^2
 
   #if (any(s > 100)) s[s > 100] <- 100 
   #if (any(s < -100)) s[s < -100] <- -100 
@@ -71,7 +71,7 @@ qdm <- function(psi, start, respfun = c("logistic", "guessing", "gumbel",
                    "dlogistic", "dlogisticp", "shepardA", "shepardAneg",
                    "shepardB", "shepardBneg", "shepardD", "shepardDneg",
                    "shepardE", "shepardEneg", "shepardF", "shepardFneg",
-                   "TK92"), estimfun = c("minchi2", "ols", "wls"),
+                   "TK92"), bias = 0, estimfun = c("minchi2", "ols", "wls"),
                    optimizer = c("optim", "nlm"), optimargs = list()){
 
   if (class(psi) == "psi"){
@@ -83,20 +83,20 @@ qdm <- function(psi, start, respfun = c("logistic", "guessing", "gumbel",
   optimizer <- match.arg(optimizer)
   if (optimizer == "nlm") {
     optArgs <- list(f=objfun, p=start, psi=psi, estimfun=estimfun,
-                    response=respfun)
+                    response=respfun, bias=bias)
     optArgs <- c(optArgs, as.list(optimargs))
     optimout <- do.call(nlm, optArgs)
     coefficients <- optimout$estimate
   } else {  # optim()
     optArgs <- list(par=start, fn=objfun, psi=psi, estimfun=estimfun,
-                    response=respfun)
+                    response=respfun, bias=bias)
     optArgs <- c(optArgs, as.list(optimargs))
     optimout <- do.call(optim, optArgs)
     coefficients <- optimout$par
   }
 
   retval = list(optimout=optimout, coefficients=coefficients, psi=psi,
-                respfun=respfun)
+                respfun=respfun, bias=bias)
   class(retval) <- "qdm"
   retval
   } else {
@@ -119,8 +119,8 @@ print.qdm <- function(x, digits = max(3L, getOption("digits") - 3L),
 
 ## FIX ME: args to qdmfun
 predict.qdm <- function(object, x = object$psi$x, y = object$psi$y,
-                        respfun = object$respfun, ...){
-  yhat <- outer(x, y, function(x, y) qdmfun(x, y, coef(object), respfun))
+                        respfun = object$respfun, bias = object$bias, ...){
+  yhat <- outer(x, y, function(x, y) qdmfun(x, y, coef(object), respfun, bias))
   dimnames(yhat) <- list(x, y)
   yhat
 }
