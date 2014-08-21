@@ -20,16 +20,16 @@ qdmfun <- function(x, y, p, response = c("logistic", "guessing", "gumbel",
      gompertz = p[7]*exp(-p[8]*exp(-p[9]*s)),
       weibull = pweibull(s, shape=p[7], scale=p[8]),
        cauchy = pcauchy(s, location=p[7], scale=p[8]),
-     shepardA = 1 - (1 - s*p[7] + (s*p[7])*log(abs(s*p[7]))),
-  shepardAneg = 1 - s*p[7] + (s*p[7])*log(abs(s*p[7])),
-     shepardB = 1 - (1 - (s*p[7])^2 + p[8]*(s*p[7])*log(abs(s*p[7]))),
-  shepardBneg = 1 - (s*p[7])^2 + p[8]*(s*p[7])*log(abs(s*p[7])),
-     shepardD = 1 - (1 - p[8]*(s*p[7]) + (s*p[7])^2),
-  shepardDneg = 1 - p[8]*(s*p[7]) + (s*p[7])^2,
-     shepardE = 1 - (1 - p[8]*s*p[7] + p[8]*(s*p[7])^2 - (s*p[7])^3),
-  shepardEneg = 1 - p[8]*s*p[7] + p[8]*(s*p[7])^2 - (s*p[7])^3,
-     shepardF = 1 - exp(-p[7]*s - p[8]),
-  shepardFneg = exp(-p[7]*s - p[8])
+     shepardA = 1 - s*p[7] + (s*p[7])*log(abs(s*p[7])),
+  shepardAneg = 1 - (1 - s*p[7] + (s*p[7])*log(abs(s*p[7]))),
+     shepardB = 1 - (s*p[7])^2 + p[8]*(s*p[7])*log(abs(s*p[7])),
+  shepardBneg = 1 - (1 - (s*p[7])^2 + p[8]*(s*p[7])*log(abs(s*p[7]))),
+     shepardD = 1 - p[8]*(s*p[7]) + (s*p[7])^2,
+  shepardDneg = 1 - (1 - p[8]*(s*p[7]) + (s*p[7])^2),
+     shepardE = 1 - p[8]*s*p[7] + p[8]*(s*p[7])^2 - (s*p[7])^3,
+  shepardEneg = 1 - (1 - p[8]*s*p[7] + p[8]*(s*p[7])^2 - (s*p[7])^3),
+     shepardF = exp(-p[7]*s - p[8]),
+  shepardFneg = 1 - exp(-p[7]*s - p[8])
   )
 }
 
