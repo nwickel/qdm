@@ -9,7 +9,7 @@
 qdm(psi, start, respfun = c("logistic", "guessing", "gumbel", "gompertz",
     "weibull", "cauchy", "shepardA", "shepardAneg", "shepardB",
     "shepardBneg", "shepardD", "shepardDneg", "shepardE", "shepardEneg",
-    "shepardF", "shepardFneg"), estimfun = c("minchi2", "ols", "wls"),
+    "shepardF", "shepardFneg"), bias=0, estimfun = c("minchi2", "ols", "wls"),
     optimizer = c("optim", "nlm"), optimargs = list())
 }
 \arguments{
@@ -17,6 +17,7 @@ qdm(psi, start, respfun = c("logistic", "guessing", "gumbel", "gompertz",
   \item{start}{starting values for parameter estimation.}
   \item{respfun}{function that shoul be used to describe relationship
   between discrimination probabilities and similarity measure, see Details.}
+  \item{bias}{Takes perceptual bias into account. Default is 0.}
   \item{estimfun}{method to estimate parameters, see Details.}
   \item{optimizer}{which optimizer should be used: \code{\link{nlm}} or
   \code{\link{optim}}.}

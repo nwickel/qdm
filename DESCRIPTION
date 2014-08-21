@@ -3,13 +3,14 @@ Version: 0.1
 Date: 2014-06-26
 Title: Fitting a Quadrilateral Dissimilariy Model to same-different data
 Authors@R: c(person("Florian", "Wickelmaier", role = c("aut", "cre"),
-                     email = "wickelmaier@web.de"),
-              person("Nora", "Umbach", role = "aut"))
+    email = "wickelmaier@web.de"),
+    person("Nora", "Umbach", role = "aut"))
 Author: Florian Wickelmaier and Nora Umbach
 Maintainer: Florian Wickelmaier <wickelmaier@web.de>
-Depends: R (>= 3.0.0), graphics
+Depends:
+    R (>= 3.0.0),
+    graphics
 Description: A short (one paragraph) description of what
-  the package does and why it may be useful.
+    the package does and why it may be useful.
 License: GPL (>= 2)
 URL: http://www.r-project.org
-
