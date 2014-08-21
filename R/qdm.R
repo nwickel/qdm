@@ -1,21 +1,16 @@
 # qdm.R
 #
-# last mod: Jul/03/2014, NU
+# last mod: Aug/21/2014, NU
 
 
 ## QDM function
 qdmfun <- function(x, y, p, response = c("logistic", "guessing", "gumbel",
-                   "gompertz", "weibull", "cauchy", "quadratic", "cubic",
-                   "dlogistic", "dlogisticp", "shepardA", "shepardAneg",
+                   "gompertz", "weibull", "cauchy", "shepardA", "shepardAneg",
                    "shepardB", "shepardBneg", "shepardD", "shepardDneg",
-                   "shepardE", "shepardEneg", "shepardF", "shepardFneg",
-                   "TK92"), bias = 0) {
+                   "shepardE", "shepardEneg", "shepardF", "shepardFneg"),
+                   bias = 0) {
 
   s <- p[1] + p[2]*x + p[3]*x^2 + 2*p[4]*abs((x-bias) - y) + p[5]*y + p[6]*y^2
-
-  #if (any(s > 100)) s[s > 100] <- 100 
-  #if (any(s < -100)) s[s < -100] <- -100 
-  #print(s)
 
   response <- match.arg(response)
   switch(EXPR = response,
@@ -25,10 +20,6 @@ qdmfun <- function(x, y, p, response = c("logistic", "guessing", "gumbel",
      gompertz = p[7]*exp(-p[8]*exp(-p[9]*s)),
       weibull = pweibull(s, shape=p[7], scale=p[8]),
        cauchy = pcauchy(s, location=p[7], scale=p[8]),
-    quadratic = p[7] + p[8]*s + p[9] * s^2,
-        cubic = p[7] + p[8]*s + p[9] * s^2 + p[10]*s^3,
-    dlogistic = 1 - exp(-p[7]*s - p[8])/((1 + exp(-p[7]*s - p[8]))^2),
-   dlogisticp = 1 - p[9]*exp(-p[7]*s - p[8])/((1 + exp(-p[7]*s - p[8]))^2),
      shepardA = 1 - (1 - s*p[7] + (s*p[7])*log(abs(s*p[7]))),
   shepardAneg = 1 - s*p[7] + (s*p[7])*log(abs(s*p[7])),
      shepardB = 1 - (1 - (s*p[7])^2 + p[8]*(s*p[7])*log(abs(s*p[7]))),
@@ -38,11 +29,9 @@ qdmfun <- function(x, y, p, response = c("logistic", "guessing", "gumbel",
      shepardE = 1 - (1 - p[8]*s*p[7] + p[8]*(s*p[7])^2 - (s*p[7])^3),
   shepardEneg = 1 - p[8]*s*p[7] + p[8]*(s*p[7])^2 - (s*p[7])^3,
      shepardF = 1 - exp(-p[7]*s - p[8]),
-  shepardFneg = exp(-p[7]*s - p[8]),
-         TK92 = s / ((s^p[7] + (1 - s)^p[7])^(1/p[7]))
+  shepardFneg = exp(-p[7]*s - p[8])
   )
 }
-# exp(700) !!!
 
 ## QDM objective function
 objfun <- function(p, psi, estimfun = c("minchi2", "ols", "wls"), ...){
@@ -67,11 +56,10 @@ objfun <- function(p, psi, estimfun = c("minchi2", "ols", "wls"), ...){
 
 ## QDM user interface
 qdm <- function(psi, start, respfun = c("logistic", "guessing", "gumbel",
-                   "gompertz", "weibull", "cauchy", "quadratic", "cubic",
-                   "dlogistic", "dlogisticp", "shepardA", "shepardAneg",
+                   "gompertz", "weibull", "cauchy", "shepardA", "shepardAneg",
                    "shepardB", "shepardBneg", "shepardD", "shepardDneg",
-                   "shepardE", "shepardEneg", "shepardF", "shepardFneg",
-                   "TK92"), bias = 0, estimfun = c("minchi2", "ols", "wls"),
+                   "shepardE", "shepardEneg", "shepardF", "shepardFneg"),
+                   bias = 0, estimfun = c("minchi2", "ols", "wls"),
                    optimizer = c("optim", "nlm"), optimargs = list()){
 
   if (class(psi) == "psi"){
