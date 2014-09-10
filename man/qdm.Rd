@@ -1,7 +1,7 @@
 % File src/library/base/man/qdm.Rd
 \name{qdm}
 \alias{qdm}
-\title{Fit Quadrilateral Dissimilarity Model}
+\title{Fit a Quadrilateral Dissimilarity Model}
 \description{
   Fits a Quadrilateral Dissimilarity Model to same-different data.
 }
@@ -13,29 +13,40 @@ qdm(psi, start, respfun = c("logistic", "guessing", "gumbel", "gompertz",
     optimizer = c("optim", "nlm"), optimargs = list())
 }
 \arguments{
-  \item{psi}{a data object created with \code{\link{psi}}.}
-  \item{start}{starting values for parameter estimation.}
-  \item{respfun}{function that shoul be used to describe relationship
+  \item{psi}{A data object created with \code{\link{psi}}.}
+  \item{start}{Starting values for parameter estimation.}
+  \item{respfun}{Function that should be used to describe relationship
   between discrimination probabilities and similarity measure, see Details.}
   \item{bias}{Takes perceptual bias into account. Default is 0.}
-  \item{estimfun}{method to estimate parameters, see Details.}
-  \item{optimizer}{which optimizer should be used: \code{\link{nlm}} or
+  \item{estimfun}{Method to estimate parameters, see Details.}
+  \item{optimizer}{Which optimizer should be used: \code{\link{nlm}} or
   \code{\link{optim}}.}
-  \item{optimargs}{takes addtional arguments to control \code{\link{nlm}}
+  \item{optimargs}{Takes additional arguments to control \code{\link{nlm}}
   or \code{\link{optim}}.}
 }
 \details{
   \preformatted{respfun}{Different functions can be used to describe the
-  relationship between discriminatin probabilities and dissimilarity
+  relationship between discrimination probabilities and dissimilarity
   measure. It can be chosen between the logistic function \code{logistic},
-  the logistic function with guessing parameter \code{guessing}, the
-  density function of the logistic function \code{dlogistic}, and four
-  functions suggested by Shepard (1987) \code{shepardA, shepardB, shepardE,
-  shepardF}. Default is the logistic function.}
+  the logistic function with guessing parameter \code{guessing}, several
+  other functions commonly used as psychometric functions: \code{gumbel},
+  \code{gompertz}, \code{weibull}, \code{cauchy}, and five functions
+  suggested by Shepard (1987) \code{shepardA, shepardB, shepardE, shepardF}
+  and their negatives \code{shepardAneg, shepardBneg, shepardEneg,
+  shepardFneg}. Default is the logistic function.}
   \preformatted{estimfun}{Parameters can be estimated by using different
-  minimizing function: ordinary least squares, weighted least squares, and
-  minimization of Pearson's \eqn{X^2}. Default is the minimization of
-  \eqn{X^2}.}
+  minimizing functions: ordinary least squares \code{ols}, weighted least
+  squares \code{wls}, and minimization of Pearson's \eqn{X^2}
+  \code{minchi2}. Default is the minimization of \eqn{X^2}.}
+}
+\references{
+  Dzhafarov, E. N., & Colonius, H. (2006). Regular Minimality: A fundamental
+  law of discrimination. In H. Colonius & E. N. Dzhafarov (Eds.),
+  \emph{Measurement and representation of sensations} (pp. 1--46).
+  Hillsdale, NJ: Lawrence Erlbaum Associates.
+
+  Shepard, R. N. (1987). Towards a universal law of generalization for
+  psychological science. \emph{Science, 237}, 1317--1323.
 }
 \examples{
 ## load data

@@ -11,14 +11,14 @@
 psi(subj, dat, oa1="s1", oa2="s2", id="id", resp="resp")
 }
 \arguments{
-  \item{subj}{id of certain subject}
-  \item{dat}{data frame with repeated same-different judgments}
-  \item{oa1}{vector of stimuli names in the first observation area}
-  \item{oa2}{vector of stimuli names in the second observation area}
-  \item{id}{name of id variable}
-  \item{resp}{name of response variable for same-different judgments;
+  \item{subj}{Id of certain subject.}
+  \item{dat}{Data frame with repeated same-different judgments.}
+  \item{oa1}{Vector of stimuli names in the first observation area.}
+  \item{oa2}{Vector of stimuli names in the second observation area.}
+  \item{id}{Name of id variable.}
+  \item{resp}{Name of response variable for same-different judgments;
   answers have to be "d" and "s" for 'different' and 'same' response,
-  respectively}
+  respectively.}
 }
 \examples{
 data(FMrate)
