@@ -25,4 +25,3 @@ data(FMrate)
 psi1 <- psi("vp01", FMrate)
 }
 %\keyword{file}
-
