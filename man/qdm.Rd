@@ -13,28 +13,30 @@ qdm(psi, start, respfun = c("logistic", "guessing", "gumbel", "gompertz",
     optimizer = c("optim", "nlm"), optimargs = list())
 }
 \arguments{
-  \item{psi}{A data object created with \code{\link{psi}}.}
-  \item{start}{Starting values for parameter estimation.}
-  \item{respfun}{Function that should be used to describe relationship
+  \item{psi}{data object created with \code{\link{psi}}.}
+  \item{start}{starting values for parameter estimation.}
+  \item{respfun}{function that should be used to describe relationship
   between discrimination probabilities and similarity measure, see Details.}
-  \item{bias}{Takes perceptual bias into account. Default is 0.}
-  \item{estimfun}{Method to estimate parameters, see Details.}
-  \item{optimizer}{Which optimizer should be used: \code{\link{nlm}} or
+  \item{bias}{takes perceptual bias into account. Default is 0.}
+  \item{estimfun}{method to estimate parameters, see Details.}
+  \item{optimizer}{which optimizer should be used: \code{\link{nlm}} or
   \code{\link{optim}}.}
-  \item{optimargs}{Takes additional arguments to control \code{\link{nlm}}
+  \item{optimargs}{takes additional arguments to control \code{\link{nlm}}
   or \code{\link{optim}}.}
 }
 \details{
-  \preformatted{respfun}{Different functions can be used to describe the
+  \preformatted{respfun}{different functions can be used to describe the
   relationship between discrimination probabilities and dissimilarity
   measure. It can be chosen between the logistic function \code{logistic},
   the logistic function with guessing parameter \code{guessing}, several
   other functions commonly used as psychometric functions: \code{gumbel},
   \code{gompertz}, \code{weibull}, \code{cauchy}, and five functions
-  suggested by Shepard (1987) \code{shepardA, shepardB, shepardE, shepardF}
-  and their negatives \code{shepardAneg, shepardBneg, shepardEneg,
-  shepardFneg}. Default is the logistic function.}
-  \preformatted{estimfun}{Parameters can be estimated by using different
+  suggested by Shepard (1987) \code{shepardA}, \code{shepardB},
+  \code{shepardD}, \code{shepardE}, \code{shepardF} and their negatives
+  \code{shepardAneg}, \code{shepardBneg}, \code{shepardDneg}
+  \code{shepardEneg}, \code{shepardFneg}. Default is the logistic
+  function.}
+  \preformatted{estimfun}{parameters can be estimated by using different
   minimizing functions: ordinary least squares \code{ols}, weighted least
   squares \code{wls}, and minimization of Pearson's \eqn{X^2}
   \code{minchi2}. Default is the minimization of \eqn{X^2}.}
@@ -57,5 +59,4 @@ psi1 <- psi("vp01", FMrate)
 p.s <- c(.2, .5, .1, .5, .3, .1, .1, .1)
 q1 <- qdm(psi1, start=p.s)
 print(q1)}
-%\keyword{file}
 
