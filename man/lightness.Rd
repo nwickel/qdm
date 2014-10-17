@@ -12,7 +12,7 @@
   different.
 }
 \usage{data(lightness)}
-\format{A data frame of 7 variables and 35,760 observations:
+\format{A data frame of seven variables and 35,760 observations:
   \describe{
     \item{\code{resp}}{the response of a subject in each trial, either \code{s}
     for same or \code{d} for different.}
