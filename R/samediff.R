@@ -1,42 +1,37 @@
 # samediff.R
 #
-# last mod: 16/Jun/2014, FW
+# last mod: Oct/16/2014, FW
 
 # Calculate discrimination probabilities, P("different"), from same-different
 # judgments
-psi <- function(subj, dat, oa1="s1", oa2="s2", id="id", resp="resp"){
-    if (sum(names(dat) == oa1) == 1 | sum(names(dat) == oa2) == 1){
-        names(dat)[names(dat) == oa1] <- "s1"
-        names(dat)[names(dat) == oa2] <- "s2"
-        } else {
+psi <- function(data, oa1 = "s1", oa2 = "s2", resp = "resp"){
+    
+    ## Check data
+    if (!(oa1 %in% names(data) && oa2 %in% names(data)))
         stop("Stimulus names need to be given to oa1 and/or oa2.")
-        }
-    if (sum(names(dat) == id) == 1){
-        names(dat)[names(dat) == id] <- "id"
-        } else {
-        stop("id variable not defined.")
-        }
-    if (sum(names(dat) == resp) == 1){
-        names(dat)[names(dat) == resp] <- "resp"
-        } else {
+    if (!resp %in% names(data))
         stop("response variable not defined.")
-        }
-    if (all(dat$resp == "d" | dat$resp == "s")){
-    freq <- as.matrix(unclass(xtabs(~ s1 + s2, dat[dat$resp == "d" & dat$id == subj,])))
+    if (!all(sort(unique(data$resp)) == c("d", "s")))
+        stop("response variable does not consist of 'd' and 's' answers only")
+    
+    ## Frequency different
+    formula <- as.formula(paste("~", paste(oa1, oa2, sep=" + ")))
+    freq <- as.matrix(unclass(xtabs(formula, data[data$resp == "d",])))
     attr(freq, "call") <- NULL
-    # nstim <- length(unique(dat$s1))  FIX ME: delete?
-    # probability different
-    n <- as.matrix(unclass(xtabs(~ s1 + s2, dat[dat$id == subj,])))
+
+    ## Probability different
+    n <- as.matrix(unclass(xtabs(formula, data)))
     attr(n, "call") <- NULL
     prob <- freq/n
     prob[which(is.na(prob))] <- 1
-    x <- as.numeric(rownames(freq))
-    y <- as.numeric(rownames(freq))
+
+    x <- if(anyNA(suppressWarnings(
+            nnam <- as.numeric(snam <- rownames(freq))))) snam else nnam
+    y <- if(anyNA(suppressWarnings(
+            nnam <- as.numeric(snam <- colnames(freq))))) snam else nnam
+
     retval <- list(prob=prob, ntrials=n, freq=freq, x=x, y=y)
     class(retval) <- "psi"
     retval
-    } else {
-    stop("response variable does not consist of 'd' and 's' answers")
-    }
 }
 
