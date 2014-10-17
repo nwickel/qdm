@@ -1,15 +1,14 @@
-% File src/library/base/man/persp.qdm.Rd
 \name{persp.qdm}
 \alias{persp.qdm}
-\title{Draw perspective plot for predictions of Quadrilateral Dissimilarity
-Model}
+\title{Draw Perspective Plot for Predictions of Quadrilateral Dissimilarity
+  Model}
 \description{
   Draws a perspective plot of the predictions of a Quadrilateral
   Dissimilarity Model fitted with \code{\link{qdm}}.
-  }
+}
 \usage{
-\method{persp}{qdm}(x, col="gray", zlim=0:1, phi=10, theta=-25,
-      xlab="OA1", ylab="OA2", zlab="Predictions", ...)
+\method{persp}{qdm}(x, col = "gray", zlim = 0:1, phi = 10, theta = -25,
+      xlab = "OA1", ylab = "OA2", zlab = "Predictions", ...)
 }
 \arguments{
   \item{x}{object of class 'qdm'. See \code{\link{qdm}}.}
