@@ -1,8 +1,14 @@
-import(graphics)
+import(
+  "stats",
+  "graphics"
+)
 
-export(qdm, psi)
+export(
+  "qdm",
+  "psi"
+)
 
-S3method(print, qdm)
-S3method(predict, qdm)
-S3method(persp, qdm)
+S3method("print", "qdm")
+S3method("predict", "qdm")
+S3method("persp", "qdm")
 

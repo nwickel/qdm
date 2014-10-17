@@ -1,17 +1,13 @@
 Package: qdm
-Version: 0.1
-Date: 2014-09-10
-Title: Fitting a Quadrilateral Dissimilariy Model to same-different data
+Version: 0.1-0
+Date: 2014-10-16
+Title: Fitting a Quadrilateral Dissimilarity Model to Same-Different Judgments
 Authors@R: c(person("Nora", "Umbach", role = c("aut", "cre"),
-    email = "nora.umbach@web.de"),
-    person("Florian", "Wickelmaier", role = "aut"))
-Author: Nora Umbach and Florian Wickelmaier
-Maintainer: Nora Umbach <nora.umbach@web.de>
-Depends:
-    R (>= 3.0.0),
-    graphics
+                    email = "nora.umbach@web.de"),
+             person("Florian", "Wickelmaier", role = "aut"))
+Depends: R (>= 3.1.0), stats, graphics
 Description: qdm provides different specifications of a Quadrilateral
-    Dissimilariy Model which can be used to fit same-different judgments in
-    order to get a predicted matrix that is regular minimality compliant.
+    Dissimilariy Model (Dzhafarov & Colonius, 2006) which can be used to fit
+    same-different judgments in order to get a predicted matrix that is
+    regular minimality compliant.
 License: GPL (>= 2)
-URL: http://www.r-project.org
