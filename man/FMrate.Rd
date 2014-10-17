@@ -25,8 +25,10 @@
       observation area; in this case: first.}
     \item{\code{s2}}{stimulus (FM rate in Hz) which was presented in the
       second observation area.}
-    \item{\code{phi1, phi2}}{random modulation phase shift for stimulus
-      presented in the first and second observation area.}
+    \item{\code{phi1}}{random modulation phase shift for stimulus presented in
+      the first observation area.}
+    \item{\code{phi2}}{random modulation phase shift for stimulus presented in
+      the second observation area.}
   }
 }
 \source{

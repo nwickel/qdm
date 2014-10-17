@@ -1,7 +1,6 @@
 \name{persp.qdm}
 \alias{persp.qdm}
-\title{Draw Perspective Plot for Predictions of Quadrilateral Dissimilarity
-  Model}
+\title{Perspective Plot for Predictions of Quadrilateral Dissimilarity Model}
 \description{
   Draws a perspective plot of the predictions of a Quadrilateral
   Dissimilarity Model fitted with \code{\link{qdm}}.
@@ -22,4 +21,4 @@
         coerced to character strings.}
   \item{...}{additional graphical parameters (see 'par').}
 }
-\seealso{\code{\link{qdm}}}
+\seealso{\code{\link{qdm}}, \code{\link{persp}}}

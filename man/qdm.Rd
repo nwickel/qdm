@@ -38,8 +38,8 @@ qdm(psi, start, respfun = c("logistic", "guessing", "gumbel", "gompertz",
   \code{shepardD}, \code{shepardE}, \code{shepardF}) and their negatives
   (\code{shepardAneg}, \code{shepardBneg}, \code{shepardDneg}
   \code{shepardEneg}, \code{shepardFneg}). Default is the logistic
-  function. Note that for some of these functions the results depend
-  critically on the choice of the starting values.
+  function. Note that for some of these functions the results critically
+  depend on the choice of the starting values.
 
   Parameters can be estimated by using different minimizing functions
   available via the \code{estimfun} argument: ordinary least squares
