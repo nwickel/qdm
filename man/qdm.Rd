@@ -51,10 +51,10 @@ qdm(psi, start, respfun = c("logistic", "guessing", "gumbel", "gompertz",
   An object of class \code{qdm} that consists of the following components:
 
   \item{optimout}{output of optimizer (\code{\link{nlm}} or
-  \code{\link{optim}}).}
+    \code{\link{optim}}).}
   \item{coefficients}{estimated parameters.}
   \item{psi}{\code{psi} object used to fit Quadrilateral Dissimilarity 
-  odel.}
+    Model.}
   \item{respfun}{function used to describe relationship between discrimination
     probabilities and similarity measure.}
   \item{bias}{perceptual bias used in the model.}
@@ -69,7 +69,8 @@ qdm(psi, start, respfun = c("logistic", "guessing", "gumbel", "gompertz",
   psychological science. \emph{Science, 237}, 1317--1323.
 }
 \seealso{
-  \code{\link{psi}}, \code{\link{predict.qdm}}, \code{\link{persp.qdm}}.
+  \code{\link{psi}}, \code{\link{predict.qdm}}, \code{\link{persp.qdm}},
+  \code{\link{nlm}}, \code{\link{optim}}.
 }
 \examples{
 ## prepare data
