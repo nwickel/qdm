@@ -6,8 +6,10 @@ Authors@R: c(person("Nora", "Umbach", role = c("aut", "cre"),
                     email = "nora.umbach@web.de"),
              person("Florian", "Wickelmaier", role = "aut"))
 Depends: R (>= 3.1.0), stats, graphics
-Description: qdm provides different specifications of a Quadrilateral
-    Dissimilariy Model (Dzhafarov & Colonius, 2006) which can be used to fit
-    same-different judgments in order to get a predicted matrix that is
-    regular minimality compliant.
+Description: This package provides different specifications of a Quadrilateral
+    Dissimilarity Model which can be used to fit same-different judgments
+    in order to get a predicted matrix that satisfies regular minimality
+    [Colonius & Dzhafarov, 2006, Measurement and representations of
+    sensations, Erlbaum]. From such a matrix, Fechnerian distances can be
+    computed.
 License: GPL (>= 2)

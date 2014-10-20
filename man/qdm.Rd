@@ -47,6 +47,18 @@ qdm(psi, start, respfun = c("logistic", "guessing", "gumbel", "gompertz",
   Pearson's \eqn{X^2} (\code{minchi2}). Default is the minimization of
   \eqn{X^2}.
 }
+\value{
+  An object of class \code{qdm} that consists of the following components:
+
+  \item{optimout}{output of optimizer (\code{\link{nlm}} or
+  \code{\link{optim}}).}
+  \item{coefficients}{estimated parameters.}
+  \item{psi}{\code{psi} object used to fit Quadrilateral Dissimilarity 
+  odel.}
+  \item{respfun}{function used to describe relationship between discrimination
+    probabilities and similarity measure.}
+  \item{bias}{perceptual bias used in the model.}
+}
 \references{
   Dzhafarov, E. N., & Colonius, H. (2006). Regular Minimality: A fundamental
   law of discrimination. In H. Colonius & E. N. Dzhafarov (Eds.),
