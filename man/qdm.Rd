@@ -67,6 +67,7 @@ qdm(psi, start, respfun = c("logistic", "guessing", "gumbel", "gompertz",
 
   Shepard, R. N. (1987). Towards a universal law of generalization for
   psychological science. \emph{Science, 237}, 1317--1323.
+  https://doi.org/10.1126/science.3629243
 }
 \seealso{
   \code{\link{psi}}, \code{\link{predict.qdm}}, \code{\link{persp.qdm}},
